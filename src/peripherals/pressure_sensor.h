@@ -5,6 +5,7 @@
 
 void    adsInit(void);
 void    i2cResetState(void);
+void    pressureReadSensors(void);
 float   getPressure(void);
 bool    isPressureFalling(void);
 bool    isPressureFallingFast(void);
