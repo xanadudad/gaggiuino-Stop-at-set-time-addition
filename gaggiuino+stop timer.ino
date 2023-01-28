@@ -85,7 +85,7 @@
 
 // Define some const values
 #define GET_KTYPE_READ_EVERY    250 // thermocouple data read interval not recommended to be changed to lower than 250 (ms)
-#define GET_PRESSURE_READ_EVERY 6
+#define GET_PRESSURE_READ_EVERY 50
 #define GET_SCALES_READ_EVERY   100
 #define REFRESH_SCREEN_EVERY    150 // Screen refresh interval (ms)
 #define DESCALE_PHASE1_EVERY    60000 // short pump pulses during descale
@@ -395,9 +395,9 @@ float getPressure() {  //returns sensor pressure data
 
     #if defined(ARDUINO_ARCH_AVR)
       #if defined(TIMERINTERRUPT_GENERIC_H)
-        return (presData[0] + presData[1]) / 39.79f - 6.17f;
+        return (presData[0] + presData[1]) / 136.54f - 1.49f;
       #else
-        return analogRead(pressurePin) / 19.9F - 6.2F;
+        return analogRead(pressurePin) / 68.0F - 1.5F;
       #endif
     #elif defined(ARDUINO_ARCH_STM32)
       return ADS.getValue() / 1706.6f - 1.49f;
@@ -962,7 +962,7 @@ void updatePressureProfilePhases() {
   {
   case 0: // no PI and no PP -> Pressure fixed at 9bar
     phases.count = 1;
-    setPhase(0, 5, 5, 1000);
+    setPhase(0, 9, 9, 1000);
     preInfusionFinishedPhaseIdx = 0;
     break;
   case 1: // Just PI no PP -> after PI pressure fixed at 9bar
